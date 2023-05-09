@@ -1,6 +1,6 @@
-import { BaseEntity } from 'src/common/base/entity.base';
+import { BaseEntity } from '@common/base/entity.base';
 import { Column, Entity } from 'typeorm';
-import { stringArrayTransformer } from 'src/common/database/orm/transformers/string-array.transformer';
+import { stringArrayTransformer } from '@common/database/orm/transformers/string-array.transformer';
 import { AccountRole } from '@modules/account-role/domain/account-role.domain';
 
 @Entity('account_role')
