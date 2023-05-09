@@ -1,8 +1,4 @@
-import {
-  CreateDateColumn,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { BaseDomain } from './domain.base';
 
 export class BaseEntity implements BaseDomain {
