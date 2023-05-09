@@ -2,10 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Account } from '../../domain/account.domain';
 import { AccountRepository } from '../../infrastructure/database/account.repository';
 import { AccountNotFoundException } from '../../infrastructure/exceptions/account-not-found.exception';
+import { GetEntityById } from '@common/interfaces/get-entity-by-id.interface';
 
-export interface GetAccountById {
-  id: Account['id'];
-}
+export type GetAccountById = GetEntityById;
 
 @Injectable()
 export class GetAccountByIdService {

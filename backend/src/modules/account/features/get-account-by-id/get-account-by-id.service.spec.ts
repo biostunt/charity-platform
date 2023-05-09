@@ -26,7 +26,7 @@ describe('GetAccountByIdService', () => {
       const id = 'test';
       jest.spyOn(mockAccountRepository, 'getById').mockResolvedValue(null);
       try {
-        const result = await service.handle({ id });
+        await service.handle({ id });
         expect(true).toBe(false);
       } catch (err) {
         expect(err).toBeInstanceOf(AccountNotFoundException);
