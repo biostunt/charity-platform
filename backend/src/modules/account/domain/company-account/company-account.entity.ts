@@ -7,6 +7,7 @@ const { COMPANY } = AccountTypeEnum;
 @ChildEntity(COMPANY)
 export class CompanyAccountEntity extends AccountEntity implements CompanyAccount {
   public type: typeof COMPANY = COMPANY;
+
   @Column({ name: 'company_name' })
   public companyName: string;
 
