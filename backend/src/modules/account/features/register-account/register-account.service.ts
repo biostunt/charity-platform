@@ -7,7 +7,6 @@ import { WrongAccountTypeException } from '../../infrastructure/exceptions/wrong
 import { AccountRole } from '@modules/account-role/domain/account-role.domain';
 import { AccountWithEmailExistException } from '../../infrastructure/exceptions/account-with-email-exist.exception';
 import { UserAccountRepository } from '../../infrastructure/database/user-account.repository';
-import { CompanyAccountEntity } from '../../domain/company-account/company-account.entity';
 import { CompanyAccountRepository } from '../../infrastructure/database/company-account.repository';
 import { AccountWithInnExistException } from '../../infrastructure/exceptions/account-with-inn-exist.exception';
 import { EncryptPasswordService } from '@core/app-auth/features/encrypt-password/encrypt-password.service';

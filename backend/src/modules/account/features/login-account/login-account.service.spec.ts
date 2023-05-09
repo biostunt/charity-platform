@@ -1,5 +1,4 @@
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { AccountEntity } from '@modules/account/domain/account.entity';
 import { AccountRepository } from '@modules/account/infrastructure/database/account.repository';
 import { ComparePasswordsService } from '@core/app-auth/features/compare-passwords/compare-passwords.service';
 import { GenerateTokenService } from '@core/app-auth/features/generate-token/generate-token.service';
