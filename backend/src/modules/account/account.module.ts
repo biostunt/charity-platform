@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { forwardRef, Module } from '@nestjs/common';
+import { getDataSourceToken, TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from './domain/account.entity';
 import { UserAccountEntity } from './domain/user-account/user-account.entity';
 import { CompanyAccountEntity } from './domain/company-account/company-account.entity';
@@ -10,16 +10,23 @@ import { UserAccountRepository } from './infrastructure/database/user-account.re
 import { RegisterAccountService } from '@modules/account/features/register-account/register-account.service';
 import { LoginAccountService } from '@modules/account/features/login-account/login-account.service';
 import { AppAuthModule } from '@core/app-auth/app-auth.module';
+import { AccountRoleModule } from '@modules/account-role/account-role.module';
+import { LoginAccountController } from '@modules/account/features/login-account/login-account.controller';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AccountEntity, UserAccountEntity, CompanyAccountEntity]), AppAuthModule],
+  imports: [
+    forwardRef(() => AppAuthModule),
+    TypeOrmModule.forFeature([AccountEntity, UserAccountEntity, CompanyAccountEntity]),
+    AccountRoleModule,
+  ],
+  controllers: [LoginAccountController],
   providers: [
     AccountRepository,
-    CompanyAccountRepository,
     UserAccountRepository,
+    CompanyAccountRepository,
     GetAccountByIdService,
-    RegisterAccountService,
     LoginAccountService,
+    RegisterAccountService,
   ],
   exports: [GetAccountByIdService],
 })
