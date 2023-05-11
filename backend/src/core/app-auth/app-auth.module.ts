@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { AccountModule } from '@modules/account/account.module';
 import { AppConfigModule } from '@core/app-config/app-config.module';
@@ -8,12 +8,14 @@ import { GET_AUTH_OBJECT_BY_ID_SERVICE } from './infrastructure/interfaces/get-a
 import { ComparePasswordsService } from './features/compare-passwords/compare-passwords.service';
 import { EncryptPasswordService } from './features/encrypt-password/encrypt-password.service';
 import { GenerateTokenService } from './features/generate-token/generate-token.service';
-import { JwtStrategy } from './infrastructure/strategies/jwt-auth.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { JwtAuthStrategy } from '@core/app-auth/infrastructure/strategies/jwt-auth.strategy';
 
 @Module({
   imports: [
     AppConfigModule,
     AccountModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [AppConfigModule],
       inject: [AppConfigService],
@@ -28,8 +30,7 @@ import { JwtStrategy } from './infrastructure/strategies/jwt-auth.strategy';
     }),
   ],
   providers: [
-    { provide: GET_AUTH_OBJECT_BY_ID_SERVICE, useClass: GetAccountByIdService },
-    JwtStrategy,
+    JwtAuthStrategy,
     ComparePasswordsService,
     EncryptPasswordService,
     GenerateTokenService,

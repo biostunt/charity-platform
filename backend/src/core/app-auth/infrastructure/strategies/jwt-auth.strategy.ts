@@ -7,11 +7,12 @@ import { AppConfigService } from '@core/app-config/app-config.service';
 import { PassportStrategy } from '@nestjs/passport';
 import { Inject, Injectable } from '@nestjs/common';
 import { Strategy, ExtractJwt } from 'passport-jwt';
+import { GetAccountByIdService } from '@modules/account/features/get-account-by-id/get-account-by-id.service';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
-  @Inject(GET_AUTH_OBJECT_BY_ID_SERVICE)
-  private readonly getAuthObjectByIdService: IGetAuthObjectByIdService;
+export class JwtAuthStrategy extends PassportStrategy(Strategy) {
+  @Inject(GetAccountByIdService)
+  private readonly getAccountByIdService: GetAccountByIdService;
 
   constructor(private readonly appConfigService: AppConfigService) {
     super({
@@ -22,6 +23,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate({ id }: JwtTokenPayload) {
-    return await this.getAuthObjectByIdService.handle({ id });
+    return await this.getAccountByIdService.handle({ id });
   }
 }
